@@ -1,4 +1,4 @@
-package com.example.springboot;
+package com.adi.dev.elective.courses;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -13,7 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-@SpringBootTest
+@SpringBootTest(classes = com.example.springboot.Application.class)
 @AutoConfigureMockMvc
 public class HelloControllerTest {
 

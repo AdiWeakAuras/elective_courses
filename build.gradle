@@ -2,7 +2,17 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.4'
 	id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.flywaydb.flyway' version '10.17.0'
 }
+
+//flyway {
+//    user = 'admin'
+//    password = 'admin'
+//   // schema = 'app-db'
+////    url = 'jdbc:h2:~/db/test'
+////    locations = 'filesystem:db/migration'
+//}
+defaultTasks 'flywayMigrate'
 
 group = 'com.adi.dev'
 version = '0.0.1-SNAPSHOT'
@@ -22,7 +32,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation('org.springframework.boot:spring-boot-starter-test')
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'com.h2database:h2:2.3.232'
+    implementation 'org.springframework.boot:spring-boot-starter-jooq'
+    implementation 'org.flywaydb:flyway-core'
 }
 
 tasks.named('test') {
