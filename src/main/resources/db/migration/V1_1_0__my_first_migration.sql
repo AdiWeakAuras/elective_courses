@@ -1,11 +1,40 @@
+BEGIN;
 
-
-CREATE TABLE IF NOT EXISTS bookmarks
+CREATE TABLE students
 (
-   id         BIGINT                                    NOT NULL,
-   title      VARCHAR(200)                              NOT NULL,
-   url        VARCHAR(500)                              NOT NULL,
-   created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW() NOT NULL,
-   updated_at TIMESTAMP WITHOUT TIME ZONE,
-   CONSTRAINT pk_bookmarks PRIMARY KEY (id)
+    id         SERIAL PRIMARY KEY,
+    full_name  VARCHAR(100) NOT NULL,
+    grade      DECIMAL(4,2) NOT NULL CHECK (grade >=0 AND GRADE <=10),
+    study_year INT NOT NULL,
+    section    VARCHAR(50) NOT NULL
 );
+
+CREATE TABLE disciplines
+(
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    category VARCHAR(20) NOT NULL,
+    study_year INT NOT NULL,
+    max_students INT NOT NULL,
+    teacher VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE preferences
+(
+    id SERIAL PRIMARY KEY,
+    student_id INT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    discipline_id INT NOT NULL REFERENCES disciplines(id) ON DELETE CASCADE,
+    preference_rank INT NOT NULL,
+    UNIQUE(student_id, discipline_id),
+    UNIQUE(student_id, preference_rank)
+);
+
+CREATE TABLE enrollments
+(
+    id SERIAL PRIMARY KEY,
+    student_id INT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    discipline_id INT NOT NULL REFERENCES disciplines(id) ON DELETE CASCADE,
+    UNIQUE(student_id, discipline_id)
+);
+
+COMMIT;
