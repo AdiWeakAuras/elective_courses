@@ -6,7 +6,7 @@ CREATE TABLE students
     full_name  VARCHAR(100) NOT NULL,
     grade      DECIMAL(4,2) NOT NULL CHECK (grade >=0 AND GRADE <=10),
     study_year INT NOT NULL,
-    section    VARCHAR(50) NOT NULL
+    faculty    VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE disciplines
