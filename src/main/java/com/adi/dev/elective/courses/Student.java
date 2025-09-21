@@ -53,4 +53,24 @@ public class Student {
     public String getFaculty() {
         return faculty;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+
+    public void setStudyYear(int studyYear) {
+        this.studyYear = studyYear;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
 }
