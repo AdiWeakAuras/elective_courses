@@ -12,54 +12,44 @@ import java.util.Objects;
 @RequestMapping("/students")
 public class StudentController {
 
-    private final StudentRepository studentRepository;
+    private final StudentService studentService;
 
-    public StudentController(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
-
+    @PostMapping("/students")
+    public Student createStudent(@RequestBody Student student){
+        return studentService.createStudent(student);
+    }
 
     // /students
     @GetMapping
     public List<Student> getAllStudents(){
-        return studentRepository.findAll();
+        return studentService.getAllStudents();
     }
 
     // /students/{id}
     @GetMapping("/{id}")
     public Student getStudentById(@PathVariable Long id){
-        return studentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found."));
+        return studentService.getStudentById(id);
     }
 
     // /students/{id}/search?name=Frodo Baggins
     @GetMapping("/search")
     public List<Student> getStudentByFullName(@RequestParam String name){
-        return studentRepository.findByFullName(name);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteStudent(@PathVariable Long id){
-        studentRepository.deleteById(id);
-
+        return studentService.getStudentByFullName(name);
     }
 
     @PutMapping("/student/{id}")
     public Student updateStudent(@PathVariable Long id, @RequestBody Student student){
-        Student existingStudent = studentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found."));
-        existingStudent.setFullName(student.getFullName());
-        existingStudent.setId(student.getId());
-        existingStudent.setGrade(student.getGrade());
-        existingStudent.setFaculty(student.getFaculty());
-        existingStudent.setStudyYear(student.getStudyYear());
-        return studentRepository.save(existingStudent);
-
+        return studentService.updateStudent(id, student);
     }
 
-    @PostMapping("/students")
-    public Student createStudent(@RequestBody Student student){
-        return studentRepository.save(student);
+    @DeleteMapping("/{id}")
+    public void deleteStudent(@PathVariable Long id){
+        studentService.deleteStudent(id);
     }
+
+
 }
