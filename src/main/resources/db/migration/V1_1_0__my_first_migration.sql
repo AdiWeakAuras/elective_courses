@@ -1,4 +1,4 @@
-BEGIN;
+
 
 CREATE TABLE students
 (
@@ -37,4 +37,6 @@ CREATE TABLE enrollments
     UNIQUE(student_id, discipline_id)
 );
 
-COMMIT;
+
+
+
