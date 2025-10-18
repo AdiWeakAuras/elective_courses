@@ -1,4 +1,5 @@
 package com.adi.dev.elective.courses;
+import com.adi.dev.elective.courses.entity.Student;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.slf4j.Logger;

@@ -1,11 +1,9 @@
 package com.adi.dev.elective.courses;
 
-import jakarta.websocket.server.PathParam;
+import com.adi.dev.elective.courses.entity.Student;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 @RestController

@@ -1,4 +1,4 @@
-package com.adi.dev.elective.courses;
+package com.adi.dev.elective.courses.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
