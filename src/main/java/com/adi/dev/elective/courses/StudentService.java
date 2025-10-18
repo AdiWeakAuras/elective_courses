@@ -15,6 +15,9 @@ public class StudentService {
     }
 
     public Student createStudent(Student student){
+        if(student.getId()!=null){
+            throw new IllegalArgumentException("You don't have to add an id!");
+        }
         return studentRepository.save(student);
     }
 

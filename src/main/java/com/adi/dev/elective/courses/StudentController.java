@@ -18,7 +18,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @PostMapping("/students")
+    @PostMapping("")
     public Student createStudent(@RequestBody Student student){
         return studentService.createStudent(student);
     }
@@ -41,7 +41,7 @@ public class StudentController {
         return studentService.getStudentByFullName(name);
     }
 
-    @PutMapping("/student/{id}")
+    @PutMapping("/{id}")
     public Student updateStudent(@PathVariable Long id, @RequestBody Student student){
         return studentService.updateStudent(id, student);
     }
