@@ -1,6 +1,8 @@
 package com.adi.dev.elective.courses;
 
 import com.adi.dev.elective.courses.entity.Student;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +19,9 @@ public class StudentController {
     }
 
     @PostMapping("")
-    public Student createStudent(@RequestBody Student student){
-        return studentService.createStudent(student);
+    public ResponseEntity<Student> createStudent(@RequestBody Student student){
+        Student createdStudent = studentService.createStudent(student);
+        return ResponseEntity.status(201).body(createdStudent);
     }
 
     // /students
@@ -40,13 +43,15 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public Student updateStudent(@PathVariable Long id, @RequestBody Student student){
-        return studentService.updateStudent(id, student);
+    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student student){
+        Student updatedStudent = studentService.updateStudent(id, student);
+        return ResponseEntity.status(200).body(updatedStudent);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteStudent(@PathVariable Long id){
+    public ResponseEntity<Void> deleteStudent(@PathVariable Long id){
         studentService.deleteStudent(id);
+        return ResponseEntity.noContent().build();
     }
 
 

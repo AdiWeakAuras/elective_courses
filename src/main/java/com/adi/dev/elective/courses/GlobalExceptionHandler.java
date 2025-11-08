@@ -7,13 +7,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(StudentNotFoundException.class)
+    public ResponseEntity<?> handleStudentNotFound(StudentNotFoundException exception){
+        return ResponseEntity.status(404).body(exception.getMessage());
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<?> handleException(IllegalArgumentException exception){
+    public ResponseEntity<?> handleIllegalArgument(IllegalArgumentException exception){
         return ResponseEntity.badRequest().body(exception.getMessage());
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<?> handleException(RuntimeException exception){
+    public ResponseEntity<?> handleRuntimeException(RuntimeException exception){
         return ResponseEntity.badRequest().body(exception.getMessage());
     }
 }

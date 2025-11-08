@@ -28,7 +28,7 @@ public class StudentService {
 
     public Student getStudentById(Long id){
         return studentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found."));
+                .orElseThrow(() -> new StudentNotFoundException(id));
     }
 
     public List<Student> getStudentByFullName(String name){
