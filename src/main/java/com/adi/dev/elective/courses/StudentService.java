@@ -21,15 +21,13 @@ public class StudentService {
         this.studentMapper = studentMapper;
     }
 
-    // ✅ Create
     public StudentResponseDTO createStudent(StudentCreateDTO dto) {
-        // No ID allowed in a create DTO
+
         Student student = studentMapper.fromCreateDTO(dto);
         Student savedStudent = studentRepository.save(student);
         return studentMapper.toResponseDTO(savedStudent);
     }
 
-    // ✅ Get all
     public List<StudentResponseDTO> getAllStudents() {
         return studentRepository.findAll()
                 .stream()
@@ -37,22 +35,33 @@ public class StudentService {
                 .collect(Collectors.toList());
     }
 
-    // ✅ Get by ID
     public StudentResponseDTO getStudentById(Long id) {
         Student student = studentRepository.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException(id));
         return studentMapper.toResponseDTO(student);
     }
 
-    // ✅ Search by full name
-    public List<StudentResponseDTO> getStudentByFullName(String name) {
-        return studentRepository.findByFullName(name)
-                .stream()
+    public List<StudentResponseDTO> getStudentByFaculty(String faculty) {
+        List<Student> students = studentRepository.findByFaculty(faculty);
+        return students.stream()
                 .map(studentMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 
-    // ✅ Update existing
+    public List<StudentResponseDTO> getStudentByStudyYear(int studyYear) {
+        List<Student> students = studentRepository.findByStudyYear(studyYear);
+        return students.stream()
+                .map(studentMapper::toResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<StudentResponseDTO> getStudentByGrade(double grade) {
+        List<Student> students = studentRepository.findByGrade(grade);
+        return students.stream()
+                .map(studentMapper::toResponseDTO)
+                .collect(Collectors.toList());
+    }
+
     public StudentResponseDTO updateStudent(Long id, StudentUpdateDTO dto) {
         Student existingStudent = studentRepository.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException(id));
@@ -63,7 +72,6 @@ public class StudentService {
         return studentMapper.toResponseDTO(updatedStudent);
     }
 
-    // ✅ Delete
     public void deleteStudent(Long id) {
         if (!studentRepository.existsById(id)) {
             throw new StudentNotFoundException(id);

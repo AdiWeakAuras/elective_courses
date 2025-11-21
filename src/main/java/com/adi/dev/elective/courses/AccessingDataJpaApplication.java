@@ -27,7 +27,6 @@ public class AccessingDataJpaApplication {
             repository.save(new Student("Frodo Baggins", 7.51, 1, "ETC"));
             repository.save(new Student("Samwise Gamgee", 6.22, 3, "AC"));
             repository.save(new Student("Peregrin Took", 8.98, 5, "FEEA"));
-            repository.save(new Student("Meriadoc Brandy", 9.55, 1, "FMI"));
 
             // fetch all customers
             log.info("Students found with findAll");

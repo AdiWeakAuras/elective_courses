@@ -25,22 +25,27 @@ public class StudentController {
         return ResponseEntity.status(201).body(createdStudent);
     }
 
-    // Get all students
     @GetMapping
-    public List<StudentResponseDTO> getAllStudents() {
-        return studentService.getAllStudents();
-    }
-
-    // Get student by ID
-    @GetMapping("/{id}")
-    public StudentResponseDTO getStudentById(@PathVariable Long id) {
-        return studentService.getStudentById(id);
-    }
-
-    // Search students by full name
-    @GetMapping("/search")
-    public List<StudentResponseDTO> getStudentByFullName(@RequestParam String name) {
-        return studentService.getStudentByFullName(name);
+    public ResponseEntity<?> getStudents(@RequestParam(required = false) Long id,
+                                         @RequestParam(required = false) String faculty,
+                                         @RequestParam(required = false) Integer studyYear,
+                                         @RequestParam(required = false) Double grade) {
+        if (id != null) {
+            StudentResponseDTO student = studentService.getStudentById(id);
+            return ResponseEntity.ok(student);
+        } else if (faculty != null) {
+            List<StudentResponseDTO> students = studentService.getStudentByFaculty(faculty);
+            return ResponseEntity.ok(students);
+        } else if (studyYear != null) {
+            List<StudentResponseDTO> students = studentService.getStudentByStudyYear(studyYear);
+            return ResponseEntity.ok(students);
+        } else if (grade != null) {
+            List<StudentResponseDTO> students = studentService.getStudentByGrade(grade);
+            return ResponseEntity.ok(students);
+        } else {
+            List<StudentResponseDTO> students = studentService.getAllStudents();
+            return ResponseEntity.ok(students);
+        }
     }
 
     // Update existing student
