@@ -7,15 +7,15 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class StudentControllerTest {
-    @InjectMocks
+public class StudentMapperTest {
+
+    @Mock
     private StudentController studentController;
 
     @Mock
     private StudentService studentService;
 
-    @Mock
+    @InjectMocks
     private StudentMapper studentMapper;
-
 
 }
